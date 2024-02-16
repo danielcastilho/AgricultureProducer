@@ -1,0 +1,28 @@
+services:
+
+  devcontainer:
+    image: mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye
+    volumes:
+      - ../..:/workspaces:cached
+    network_mode: service:postgres
+    command: sleep infinity
+
+  postgres:
+    image: "postgres:14"
+    restart: unless-stopped
+    environment: 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres # mudar para usar secrets em produção
+      - POSTGRES_DB=brain_agriculture
+      - POSTGRES_HOST=postgres
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
+
+

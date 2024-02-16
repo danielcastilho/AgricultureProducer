@@ -1,0 +1,25 @@
+services:
+  # produtor_rural:
+  #   image: produtor_rural
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - postgres
+
+  postgres:
+    image: "postgres:14"
+    environment: 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres # mudar para usar secrets em produção
+      - POSTGRES_DB=brain_agriculture
+      - POSTGRES_HOST=postgres
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../volumes/postgres:/var/lib/postgresql/data:Z
+

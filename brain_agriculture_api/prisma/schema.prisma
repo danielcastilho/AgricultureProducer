@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "foreignKeys"
+}
+
+model AgriculturalCulture {
+  id             String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name           String          @unique
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime?       @updatedAt
+  RuralProducers RuralProducer[]
+}
+
+model State {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String    @unique
+  acronym   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  Cities    City[]
+}
+
+model City {
+  id             String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name           String          @unique
+  stateId        String          @db.Uuid
+  state          State           @relation(fields: [stateId], references: [id])
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime?       @updatedAt
+  RuralProducers RuralProducer[]
+}
+
+model RuralProducer {
+  id                   String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime?             @updatedAt
+  document             String                @unique @db.VarChar(14)
+  name                 String
+  farmName             String
+  cityId               String?               @db.Uuid
+  City                 City?                 @relation(fields: [cityId], references: [id])
+  totalArea            Float
+  agriculturalArea     Float
+  vegetationArea       Float
+  AgriculturalCultures AgriculturalCulture[]
+}
+
+// CPF ou CNPJ
+// Nome do produtor
+// Nome da Fazenda
+// Cidade
+// Estado
+// Área total em hectares da fazenda
+// Área agricultável em hectares
+// Área de vegetação em hectares
+// Culturas plantadas (Soja, Milho, Algodão, Café, Cana de Açucar)

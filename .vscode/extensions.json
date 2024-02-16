@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "imgildev.vscode-nestjs-generator",
+        "dbaeumer.vscode-eslint",
+        "cweijan.vscode-postgresql-client2",
+        "firsttris.vscode-jest-runner",
+        "imgildev.vscode-nestjs-prisma-snippets",
+        "prisma.prisma",
+        "eamodio.gitlens",
+        "prisma.prisma",
+        "steoates.autoimport",
+        "qcz.text-power-tools"
+    ]
+}

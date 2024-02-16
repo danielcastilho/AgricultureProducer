@@ -1,0 +1,6 @@
+{
+    "explorer.fileNesting.enabled": true,
+    "files.eol": "\n",
+    "git.ignoreLimitWarning": true,
+    //"terminal.integrated.cwd": "/workspaces/TesteNodeBack/brain_agriculture_api"
+}
